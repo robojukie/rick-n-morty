@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
-import logo from './logo.svg';
+import CharacterList from './CharacterList';
 import './App.css';
 
 const url = 'https://rickandmortyapi.com/api/character'
 function App() {
   
-  const [ characters, setCharacters ] = useState({});
+  const [ characters, setCharacters ] = useState([]);
 
   async function fetchCharacters() {
     await fetch(url, {
       method: 'GET'
     })
     .then((response) => response.json())
-    .then((resJSON) => setCharacters(resJSON))
+    .then((resJSON) => {
+      setCharacters(resJSON.results)
+    })
   }
 
   useEffect(() => {
@@ -22,19 +24,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      {/* <Filter></Filter> */}
+      <CharacterList characters={characters}></CharacterList>
     </div>
   );
 }
