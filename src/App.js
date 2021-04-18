@@ -1,7 +1,24 @@
+import { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+const url = 'https://rickandmortyapi.com/api/character'
 function App() {
+  
+  const [ characters, setCharacters ] = useState({});
+
+  async function fetchCharacters() {
+    await fetch(url, {
+      method: 'GET'
+    })
+    .then((response) => response.json())
+    .then((resJSON) => setCharacters(resJSON))
+  }
+
+  useEffect(() => {
+    fetchCharacters()
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
