@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -13,21 +9,6 @@
   }
 }
 
-/* .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
-
-.App-link {
-  color: #61dafb;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,3 +17,109 @@
     transform: rotate(360deg);
   }
 }
+
+/* App */
+.list-page-container, .detail-page-container {
+  width: 100%;
+  padding: 20px;
+  margin: auto;
+}
+
+a {
+  color: #2F9331;
+  text-decoration: none;
+}
+
+/* CharacterList */
+.list-page-container-top {
+  width: 75%;
+  margin: auto;
+}
+
+.list-page-container-top h1 {
+  margin: 20px;
+}
+
+.list-page-container-top h3 {
+  margin: 20px;
+  color: gray;
+}
+
+.list-container {
+  width: 75%;
+  margin: auto;
+}
+
+.character-list {
+  /* width: 75%; */
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+
+.character-item {
+  padding: 20px;
+  min-height: 30px;
+  min-width: 600px;
+  margin: 20px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.character-item a {
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.character-thumbnail {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 25%;
+  flex-shrink: 0;
+}
+
+.character-item-info {
+  padding-left: 20px;
+  border-left: 1px solid #eee;
+
+  flex: 1;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* CharacterDetail */
+.detail-page-top, .character-details, .detail-page-bottom {
+  width: 75%;
+  margin: auto;
+  margin-bottom: 40px;
+  display: flex;
+}
+
+.character-details {
+  flex-direction: column;
+}
+
+.character-profile-picture {
+  width: 200px;
+  height: 200px;
+  margin-right: 40px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 25%;
+  flex-shrink: 0;
+}
+
+
+
