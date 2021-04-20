@@ -4,7 +4,7 @@ function CharacterList(props) {
   const { characters } = props;
 
   return (
-    <div>
+    <ul className='character-list'>
       {
         characters.map((character) => {
           return (
@@ -16,11 +16,12 @@ function CharacterList(props) {
               status={character.status}
               gender={character.gender}
               species={character.species}
+              url={character.url}
             />
           )
         })
       }
-    </div>
+    </ul>
   )
 }
 

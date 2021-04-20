@@ -1,10 +1,16 @@
+import { Link } from 'react-router-dom';
+
 function CharacterItem(props) {
   const { id, name, status, gender, species, image } = props;
+  
   return (
-    <div>
+    <Link
+      to={`/character/${id}`}
+    >
+      <img src={image} alt='character profile' />
       <div>{name}</div>
       <div>{status}</div>
-    </div>
+    </Link>
   )
 }
 
