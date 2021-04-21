@@ -5,14 +5,12 @@ function Filter(props) {
     <input
       type='text'
       value={query}
-      placeholder='Search for characters'
+      placeholder='Search characters'
       onChange={(e) => {
         filterCharacters(e.target.value)
       }}
     />
   )
-
-
 }
 
 export default Filter;

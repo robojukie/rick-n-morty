@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import CharacterList from './CharacterList';
 import CharacterDetail from './CharacterDetail';
 import Filter from './Filter';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import './App.css';
 
@@ -14,7 +14,7 @@ function App() {
   const [ filteredCharacters, setFilteredCharacters ] = useState([]);
   const [ query, setQuery ] = useState('');
 
-  // fetching base url returns 20 characters from paginated API
+  // fetching base url returns 20 of 600+ characters from paginated API
   async function fetchCharacters() {
     await fetch(baseUrl, {
       method: 'GET'
@@ -47,36 +47,38 @@ function App() {
     <div className="App">
       <header className="App-header">
       </header>
-      <Route
-        exact path='/'
-        render={() => (
-          <div className='list-page-container'>
-            <div className='list-page-container-top'>
-              <h1>Characters</h1>
-              <h3>Select a character for more details</h3>
-              <Filter
-                query={query}
-                filterCharacters={filterCharacters}
-              />
-              <p>Showing {filteredCharacters.length} Characters</p>
+      <Switch>
+        <Route
+          exact path='/'
+          render={() => (
+            <div className='list-page-container'>
+              <div className='list-page-container-top'>
+                <h1>Characters</h1>
+                <h3>Select a character for more details</h3>
+                <Filter
+                  query={query}
+                  filterCharacters={filterCharacters}
+                />
+                <p>Showing {filteredCharacters.length} Characters</p>
+              </div>
+              <div className='list-container'>
+                <CharacterList
+                  characters={filteredCharacters}
+                  query={query}
+                />
+              </div>
             </div>
-            <div className='list-container'>
-              <CharacterList
-                characters={filteredCharacters}
-                query={query}
-              />
-            </div>
-          </div>
-        )}
-      />
-      <Route
-        path='/character/:id'
-        render={() => (
-          <CharacterDetail 
-            characters={characters}
-          />
-        )}
-      />
+          )}
+        />
+        <Route
+          path='/character/:id'
+          render={() => (
+            <CharacterDetail
+              characters={characters}
+            />
+          )}
+        />
+      </Switch>
     </div>
   );
 }
