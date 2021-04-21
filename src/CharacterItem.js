@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 function CharacterItem(props) {
-  const { id, name, status, gender, species, image } = props;
+  const { id, name, image } = props;
   
   return (
     <li className='character-item'>

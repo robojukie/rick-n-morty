@@ -13,10 +13,6 @@ function CharacterList(props) {
               id={character.id}
               name={character.name}
               image={character.image}
-              status={character.status}
-              gender={character.gender}
-              species={character.species}
-              url={character.url}
             />
           )
         })
