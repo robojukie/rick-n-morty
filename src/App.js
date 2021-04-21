@@ -7,7 +7,6 @@ import { Route } from 'react-router-dom';
 import './App.css';
 
 function App() {
-  // fetching base url returns 20 characters
   let baseUrl = 'https://rickandmortyapi.com/api/character/';
 
   const [ characters, setCharacters ] = useState([]);
@@ -15,6 +14,7 @@ function App() {
   const [ filteredCharacters, setFilteredCharacters ] = useState([]);
   const [ query, setQuery ] = useState('');
 
+  // fetching base url returns 20 characters from paginated API
   async function fetchCharacters() {
     await fetch(baseUrl, {
       method: 'GET'
@@ -72,7 +72,9 @@ function App() {
       <Route
         path='/character/:id'
         render={() => (
-          <CharacterDetail characters={characters}/>
+          <CharacterDetail 
+            characters={characters}
+          />
         )}
       />
     </div>
