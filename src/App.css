@@ -11,12 +11,15 @@ a {
 }
 
 /* CharacterList page */
-.list-page-container-top, .list-page-container-bottom {
+/* .list-page-container-top, .list-page-container-bottom { */
+/* CharacterList */
+.list-page-container-top, .list-container {
   width: 75%;
   margin: auto;
 }
 
 .list-page-container-top * {
+  /* list-style-type: none; */
   margin: 20px;
 }
 

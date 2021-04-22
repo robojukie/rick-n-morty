@@ -14,6 +14,20 @@ function App() {
   const [ filteredCharacters, setFilteredCharacters ] = useState([]);
   const [ query, setQuery ] = useState({});
 
+  // const [ selectedFilters, setSelectedFilters ] = useState(
+  //   {
+  //     name: '',
+  //     gender: [],
+  //     status: []
+  //   }
+  // )
+  // const [ isGenderSelected, setIsGenderSelected ] = useState(false);
+  const [ isFemaleSelected, setIsFemaleSelected ] = useState(false);
+  const [ isMaleSelected, setIsMaleSelected ] = useState(false);
+  
+  // const [ isStatusSelected, setIsStatusSelected ] = useState(false);
+  // const [ isUnknownSelected, setIsUnknownSelected ] = useState(false);
+
   // fetching base url returns 20 of 600+ characters from paginated API
   useEffect(() => {
     /**
