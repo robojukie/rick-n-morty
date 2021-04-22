@@ -7,7 +7,7 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
 function App() {
-  let baseUrl = 'https://rickandmortyapi.com/api/character/';
+  const baseUrl = 'https://rickandmortyapi.com/api/character/';
 
   const [ characters, setCharacters ] = useState([]);
   // use to display characters without modifying original list of characters
@@ -15,21 +15,20 @@ function App() {
   const [ query, setQuery ] = useState('');
 
   // fetching base url returns 20 of 600+ characters from paginated API
-  async function fetchCharacters() {
-    await fetch(baseUrl, {
-      method: 'GET'
-    })
-    .then((response) => response.json())
-    .then((resJSON) => {
-      setCharacters([...resJSON.results])
-      setFilteredCharacters([...resJSON.results])
-    })
-    .catch(error => console.error('Error', error))
-  }
-
   useEffect(() => {
+    async function fetchCharacters() {
+      await fetch(baseUrl, {
+        method: 'GET'
+      })
+      .then((response) => response.json())
+      .then((resJSON) => {
+        setCharacters([...resJSON.results])
+        setFilteredCharacters([...resJSON.results])
+      })
+      .catch(error => console.error('Error', error))
+    }
     fetchCharacters()
-  }, [])
+  }, [baseUrl])
 
   const filterCharacters = (updatedQuery) => {
     setQuery(updatedQuery);

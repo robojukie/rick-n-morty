@@ -96,6 +96,7 @@ a {
   margin: auto;
   margin-bottom: 40px;
   display: flex;
+  justify-content: center;
 }
 
 .detail-page-bad-id {
