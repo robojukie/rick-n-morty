@@ -3,6 +3,7 @@ function Filter(props) {
 
   return (
     <input
+      className='filter-characters'
       type='text'
       value={query}
       placeholder='Search characters'

@@ -10,25 +10,37 @@ a {
   text-decoration: none;
 }
 
-/* CharacterList */
-.list-page-container-top {
+/* CharacterList page */
+.list-page-container-top, .list-container {
   width: 75%;
   margin: auto;
 }
 
 .list-page-container-top * {
-  margin-left: 20px;
+  margin: 20px;
 }
 
 .list-page-container-top h3 {
   color: gray;
 }
 
-.list-container {
-  width: 75%;
-  margin: auto;
+/* Filter/Search */
+
+.filter-container {
+  margin: 20;
 }
 
+.filter-characters {
+  width: 100%;
+  min-width: 300px;
+  padding: 10px;
+  margin: 0;
+  font-size: 1em;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+}
+
+/* CharacterList main */
 .character-list {
   margin: 0;
   padding: 0;
@@ -39,7 +51,7 @@ a {
 .character-item {
   padding: 10px;
   min-height: 30px;
-  min-width: 600px;
+  min-width: 300px;
   margin: 20px;
   border: 1px solid lightgray;
   border-radius: 4px;
@@ -59,6 +71,7 @@ a {
   width: 50px;
   height: 50px;
   margin-left: 10px;
+  margin-right: 20px;
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 25%;

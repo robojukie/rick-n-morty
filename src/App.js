@@ -55,10 +55,12 @@ function App() {
               <div className='list-page-container-top'>
                 <h1>Characters</h1>
                 <h3>Select a character for more details</h3>
-                <Filter
-                  query={query}
-                  filterCharacters={filterCharacters}
-                />
+                <div className='filter-container'>
+                  <Filter
+                    query={query}
+                    filterCharacters={filterCharacters}
+                  />
+                </div>
                 <p>Showing {filteredCharacters.length} Characters</p>
               </div>
               <div className='list-container'>
