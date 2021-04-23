@@ -71,10 +71,13 @@ function App() {
         filtered = characters.filter((c) => {
           const nameMatched = c.name.toLowerCase().includes(query.name && query.name.trim().toLowerCase())
           const genderMatched = query[c.gender.toLowerCase()] === true;
-          return (nameMatched && genderMatched) 
+          const statusMatched = query[c.status.toLowerCase()] === true;
+          const speciesMatched = query[c.species.toLowerCase()] === true;
+          console.log({statusMatched, speciesMatched})
+          return (nameMatched && (genderMatched || statusMatched || speciesMatched)) 
             || (nameMatched && areAllUnchecked) // for inital app load when all unchecked
             || (!query.name && areAllUnchecked) // absence of query.name and all unchecked after intially checked
-            || (!query.name && genderMatched) // handles initial absence of query.name
+            || (!query.name && genderMatched && statusMatched && speciesMatched) // handles initial absence of query.name
         })
       }
       
