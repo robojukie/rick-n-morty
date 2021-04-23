@@ -16,6 +16,7 @@ function CharacterList(props) {
               id={character.id}
               name={character.name}
               image={character.image}
+              species={character.species}
             />
           )
         }) : <div>No characters found!</div>
