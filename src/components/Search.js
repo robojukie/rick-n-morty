@@ -1,5 +1,5 @@
 /**
- * Filters by text
+ * Filters names by text
  * @param { object } query Query options
  * @param { function } filterCharacters Function to filter characters
  * @returns text input
