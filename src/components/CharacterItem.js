@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 
+/**
+ * Displays clickable character card
+ */
 function CharacterItem(props) {
   const { id, name, image } = props;
   

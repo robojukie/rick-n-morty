@@ -16,6 +16,9 @@ function App() {
 
   // fetching base url returns 20 of 600+ characters from paginated API
   useEffect(() => {
+    /**
+     * Fetches characters from API
+     */
     async function fetchCharacters() {
       await fetch(baseUrl, {
         method: 'GET'
@@ -33,7 +36,6 @@ function App() {
   /**
    * Filter characters when query changes
    */
-
   useEffect(() =>{
     /**
      * if (name empty and all unchecked) -> return all characters
@@ -42,6 +44,7 @@ function App() {
     const filterCharacters = () => {
       let filtered;
       let areAllUnchecked = true;
+      // TODO break out into functions
       if (query) {
         // check for all filter values to not be true
         for ( const [key, val] of Object.entries(query)) {
@@ -66,6 +69,10 @@ function App() {
     filterCharacters(query)
   }, [query])
 
+  /**
+   * Sets query with updated values
+   * @param { event } e Event interface
+   */
   const handleQueryChange = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
 

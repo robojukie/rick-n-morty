@@ -24,6 +24,13 @@ const genderFilters = [
     fType: 'gender'
   }
 ]
+
+/**
+ * Filters by gender
+ * @param { object } query Query options
+ * @param { function } filterCharacters Function to filter characters
+ * @returns list of gender checkboxes
+ */
 function Filter(props) {
   const { query, filterCharacters } = props;
   

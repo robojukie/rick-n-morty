@@ -1,5 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
 
+/**
+ * Displays page of individual character details, including image, name, status, gender, species, location
+ */
 function CharacterDetail(props) {
   const { characters } = props;
   
