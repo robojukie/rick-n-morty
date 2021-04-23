@@ -30,14 +30,16 @@ a {
 }
 
 .list-container {
-  min-width: 450px;
+  min-width: 100px;
+  width: 75%;
 }
 
 /* Filter/Search */
 
-/* .filter-container {
-  margin: 20;
-} */
+.filter-container {
+  margin-left: 20px;
+  width: 25%;
+}
 
 .filter-characters {
   width: 100%;
