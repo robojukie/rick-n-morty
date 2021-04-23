@@ -1,5 +1,8 @@
 import CharacterItem from './CharacterItem';
 
+/**
+ * Renders filtered list of characters
+ */
 function CharacterList(props) {
   const { characters } = props;
 
