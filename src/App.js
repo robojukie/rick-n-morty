@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import CharacterList from './CharacterList';
-import CharacterDetail from './CharacterDetail';
-import Filter from './Filter';
-import Search from './Search';
+import CharacterList from './components/CharacterList';
+import CharacterDetail from './components/CharacterDetail';
+import Filter from './components/Filter';
+import Search from './components/Search';
 import { Route, Switch } from 'react-router-dom';
 
 import './App.css';
