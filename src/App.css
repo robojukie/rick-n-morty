@@ -11,7 +11,7 @@ a {
 }
 
 /* CharacterList page */
-.list-page-container-top, .list-container {
+.list-page-container-top, .list-page-container-bottom {
   width: 75%;
   margin: auto;
 }
@@ -24,11 +24,20 @@ a {
   color: gray;
 }
 
+.list-page-container-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-container {
+  min-width: 450px;
+}
+
 /* Filter/Search */
 
-.filter-container {
+/* .filter-container {
   margin: 20;
-}
+} */
 
 .filter-characters {
   width: 100%;
@@ -40,13 +49,16 @@ a {
   border-radius: 4px;
 }
 
+.filter-checkbox-input {
+  font-size: 0.75em;
+}
+
 /* CharacterList main */
 .character-list {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
-
 
 .character-item {
   padding: 10px;

@@ -6,7 +6,7 @@ function CharacterList(props) {
   return (
     <ul className='character-list'>
       {
-        characters.map((character) => {
+        characters.length > 0 ? characters.map((character) => {
           return (
             <CharacterItem
               key={character.id}
@@ -15,7 +15,7 @@ function CharacterList(props) {
               image={character.image}
             />
           )
-        })
+        }) : <div>No characters found!</div>
       }
     </ul>
   )
