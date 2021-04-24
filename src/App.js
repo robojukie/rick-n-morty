@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import CharacterList from './components/CharacterList';
 import CharacterDetail from './components/CharacterDetail';
-import Filter from './components/Filter';
+import Filter, { genderFilters, statusFilters, speciesFilters } from './components/Filter';
 import Search from './components/Search';
 import { Route, Switch } from 'react-router-dom';
 
@@ -13,20 +13,6 @@ function App() {
   // use to display characters without modifying original list of characters
   const [ filteredCharacters, setFilteredCharacters ] = useState([]);
   const [ query, setQuery ] = useState({});
-
-  // const [ selectedFilters, setSelectedFilters ] = useState(
-  //   {
-  //     name: '',
-  //     gender: [],
-  //     status: []
-  //   }
-  // )
-  // const [ isGenderSelected, setIsGenderSelected ] = useState(false);
-  const [ isFemaleSelected, setIsFemaleSelected ] = useState(false);
-  const [ isMaleSelected, setIsMaleSelected ] = useState(false);
-  
-  // const [ isStatusSelected, setIsStatusSelected ] = useState(false);
-  // const [ isUnknownSelected, setIsUnknownSelected ] = useState(false);
 
   // fetching base url returns 20 of 600+ characters from paginated API
   useEffect(() => {
@@ -51,36 +37,43 @@ function App() {
    * Filter characters when query changes
    */
   useEffect(() =>{
-    /**
-     * if (name empty and all unchecked) -> return all characters
-     * else filter by name and gender
-     */
+    // check for all filter values to not be true
+    const returnAllValues = (filterType) => {
+      for (const item of filterType) {
+        if (query[item.name] === true) {
+          return false
+        }
+      }
+      return true
+    }
+    // if all boxes are unchecked, return true so all characters are returned after filter
+    const returnAllGenders = query ? returnAllValues(genderFilters) : true
+    const returnAllStatus = query ? returnAllValues(statusFilters) : true
+    const returnAllSpecies = query ? returnAllValues(speciesFilters) : true
+
     const filterCharacters = () => {
       let filtered;
-      let areAllUnchecked = true;
-      // TODO break out into functions
       if (query) {
-        // check for all filter values to not be true
-        for ( const [key, val] of Object.entries(query)) {
-          if (val === true) {
-            areAllUnchecked =  false;
-            break;
-          }
-        }
-
         filtered = characters.filter((c) => {
-          const nameMatched = c.name.toLowerCase().includes(query.name && query.name.trim().toLowerCase())
-          const genderMatched = query[c.gender.toLowerCase()] === true;
-          const statusMatched = query[c.status.toLowerCase()] === true;
-          const speciesMatched = query[c.species.toLowerCase()] === true;
-          console.log({statusMatched, speciesMatched})
-          return (nameMatched && (genderMatched || statusMatched || speciesMatched)) 
-            || (nameMatched && areAllUnchecked) // for inital app load when all unchecked
-            || (!query.name && areAllUnchecked) // absence of query.name and all unchecked after intially checked
-            || (!query.name && genderMatched && statusMatched && speciesMatched) // handles initial absence of query.name
+          const name = c.name.toLowerCase()
+          const gender = c.gender.toLowerCase()
+          // query stores all filter types by name, so need to differentiate when query.name = 'unknown' by type (i.e. 'unknownStatus'). query.unknown defaults to unknown gender value
+          const status = c.status.toLowerCase() === 'unknown' ? c.status.toLowerCase() + 'Status' : c.status.toLowerCase()
+          const species = c.species.toLowerCase() === 'unknown' ? c.species.toLowerCase() + 'Species' : c.species.toLowerCase()
+
+          const nameMatched = name.includes(query.name.trim().toLowerCase())
+          const genderMatched = query[gender] === true
+          const statusMatched = query[status] === true
+          const speciesMatched = query[species] === true
+
+          if ((returnAllGenders || genderMatched) && (returnAllStatus || statusMatched) && (returnAllSpecies || speciesMatched)) {
+            if (!query.name || nameMatched) {
+              return true
+            }
+          }
+          return false
         })
-      }
-      
+      }     
       setFilteredCharacters(filtered)
     }
     filterCharacters(query)
@@ -92,7 +85,6 @@ function App() {
    */
   const handleQueryChange = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
-
     if (e.target.type === 'text') {
       setQuery((query) => ({
         ...query,
@@ -114,6 +106,7 @@ function App() {
         <Route
           exact path='/'
           render={() => (
+            // break this out into component
             <div className='list-page-container'>
               <div className='list-page-container-top'>
                 <h1>Characters</h1>
