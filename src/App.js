@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import CharacterList from './components/CharacterList';
 import CharacterDetail from './components/CharacterDetail';
-import Filter from './components/Filter';
+import Filter, { genderFilters, statusFilters, speciesFilters } from './components/Filter';
 import Search from './components/Search';
 import { Route, Switch } from 'react-router-dom';
 
@@ -13,20 +13,6 @@ function App() {
   // use to display characters without modifying original list of characters
   // const [ filteredCharacters, setFilteredCharacters ] = useState([]);
   const [ query, setQuery ] = useState({});
-
-  // const [ selectedFilters, setSelectedFilters ] = useState(
-  //   {
-  //     name: '',
-  //     gender: [],
-  //     status: []
-  //   }
-  // )
-  // const [ isGenderSelected, setIsGenderSelected ] = useState(false);
-  const [ isFemaleSelected, setIsFemaleSelected ] = useState(false);
-  const [ isMaleSelected, setIsMaleSelected ] = useState(false);
-  
-  // const [ isStatusSelected, setIsStatusSelected ] = useState(false);
-  // const [ isUnknownSelected, setIsUnknownSelected ] = useState(false);
 
   // fetching base url returns 20 of 600+ characters from paginated API
   useEffect(() => {
@@ -79,7 +65,6 @@ function App() {
    */
   const handleQueryChange = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
-
     if (e.target.type === 'text') {
       setQuery((query) => ({
         ...query,
@@ -101,6 +86,7 @@ function App() {
         <Route
           exact path='/'
           render={() => (
+            // break this out into component
             <div className='list-page-container'>
               <div className='list-page-container-top'>
                 <h1>Characters</h1>

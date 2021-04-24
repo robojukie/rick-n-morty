@@ -1,4 +1,4 @@
-const genderFilters = [
+export const genderFilters = [
   {
     name: 'female',
     key: 'gender1',
@@ -25,9 +25,9 @@ const genderFilters = [
   }
 ]
 
-const statusFilters = [
+export const statusFilters = [
   {
-    name: '',
+    name: 'alive',
     key: 'status1',
     label: 'Alive',
     fType: 'status'
@@ -47,7 +47,7 @@ const statusFilters = [
   }
 ]
 
-const speciesFilters = [
+export const speciesFilters = [
   {
     name: 'human',
     key: 'species1',
@@ -108,7 +108,7 @@ function Filter(props) {
                 <input
                   type='checkbox'
                   name={filt.name}
-                  checked={(query && query[filt.name]) || false}
+                  checked={(query && query[filt.name]) || false} // unknown
                   onChange={filterCharacters}
                 />
                 {filt.label}
