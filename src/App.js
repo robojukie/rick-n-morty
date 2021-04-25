@@ -90,6 +90,13 @@ function App() {
   }, [query])
 
 
+  // handling favorites
+
+  useEffect(() => {
+    setFavorites(JSON.parse(window.localStorage.getItem('favorites')));
+  }, [favorites]);
+
+
   function toggleFavorite(id) {
     setFavorites((favs) => ({
       ...favorites,

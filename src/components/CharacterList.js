@@ -1,4 +1,4 @@
-import { buildQueries } from '@testing-library/dom';
+import PropTypes from 'prop-types'; // ES6
 import CharacterItem from './CharacterItem';
 
 /**
@@ -12,6 +12,7 @@ function CharacterList(props) {
       {
         characters.length > 0 ? characters.map((character) => {
           // if character.id === true, add class favorite, else don't add class favorite
+          console.log({favorites})
           const isFavorite = favorites[character.id] === true;
 
           return (
@@ -38,6 +39,13 @@ function CharacterList(props) {
       }
     </ul>
   )
+}
+
+CharacterList.propTypes = {
+  characters: PropTypes.array.isRequired,
+  favorites: PropTypes.array.isRequired,
+  toggleFavorite: PropTypes.func.isRequired
+
 }
 
 export default CharacterList;
