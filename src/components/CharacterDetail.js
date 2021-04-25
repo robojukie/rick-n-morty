@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 /**
  * Displays page of individual character details, including image, name, status, gender, species, location
@@ -25,7 +26,7 @@ function CharacterDetail(props) {
         <div className='detail-page-top'>
           <div className='character-profile-picture' style={{backgroundImage: `url(${selectedCharacter.image})`}}></div>
           <div className='character-details'>
-            <h1 className={isFavorite && 'favorite'}>
+            <h1 className={isFavorite ? 'favorite' : undefined}>
               {selectedCharacter.name}
             </h1>
             <div>Status: {selectedCharacter.status}</div>
@@ -49,6 +50,11 @@ function CharacterDetail(props) {
       </div>
     </div>
   )
+}
+
+CharacterDetail.propTypes = {
+  characters: PropTypes.array.isRequired,
+  favorites: PropTypes.object.isRequired,
 }
 
 export default CharacterDetail;

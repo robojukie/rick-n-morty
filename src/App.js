@@ -12,8 +12,9 @@ function App() {
   const [ characters, setCharacters ] = useState([]);
   // use to display characters without modifying original list of characters
   const [ filteredCharacters, setFilteredCharacters ] = useState([]);
-  const [ favorites, setFavorites ] = useState({id: "", favorite: false});
+  const [ favorites, setFavorites ] = useState({});
   const [ query, setQuery ] = useState({});
+  const [ isLoaded, setIsLoaded ] = useState(false);
 
   // fetching base url returns 20 of 600+ characters from paginated API
   useEffect(() => {
@@ -26,22 +27,17 @@ function App() {
       })
       .then((response) => response.json())
       .then((resJSON) => {
-        setCharacters([...resJSON.results])
-        setFilteredCharacters([...resJSON.results])
-
-        resJSON.results.map((character) => {
-          setFavorites((favorites) => {
-            return {
-              ...favorites,
-              [character.id]: false
-            }
-          })
-        })
+        let results = [...resJSON.results]
+        setCharacters([...results])
+        setFilteredCharacters([...results])
+        
+        setIsLoaded(true)
       })
       .catch(error => console.error('Error', error))
     }
     fetchCharacters()
-  }, [baseUrl])
+  }, [])
+
 
   /**
    * Filter characters when query changes
@@ -91,19 +87,24 @@ function App() {
 
 
   // handling favorites
+  useEffect(() => {
+    console.log('how often do i run')
+    setFavorites(JSON.parse(window.localStorage.getItem('favorites')));
+  }, []);
 
   useEffect(() => {
-    setFavorites(JSON.parse(window.localStorage.getItem('favorites')));
+    window.localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
 
   function toggleFavorite(id) {
+    // console.log({id})
     setFavorites((favs) => ({
       ...favorites,
-      [id]: !(favs[id])
+      [id]: favs ? !(favs[id]) : true
     }))
   }
-  
+
   /**
    * Sets query with updated values
    * @param { event } e Event interface
@@ -164,7 +165,7 @@ function App() {
         <Route
           path='/character/:id'
           render={() => (
-            <CharacterDetail
+            isLoaded && <CharacterDetail
               characters={characters}
               favorites={favorites}
             />

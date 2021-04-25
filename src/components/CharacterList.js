@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'; // ES6
+import PropTypes from 'prop-types';
 import CharacterItem from './CharacterItem';
 
 /**
@@ -11,13 +11,11 @@ function CharacterList(props) {
     <ul className='character-list'>
       {
         characters.length > 0 ? characters.map((character) => {
-          // if character.id === true, add class favorite, else don't add class favorite
-          console.log({favorites})
           const isFavorite = favorites[character.id] === true;
 
           return (
             <div key={character.id}
-              className={isFavorite && 'favorite'}
+              className={isFavorite ? 'favorite' : undefined}
             >
               <div 
                 onClick={() => toggleFavorite(character.id)}
@@ -25,7 +23,7 @@ function CharacterList(props) {
                 +
               </div>
               <CharacterItem
-                className={isFavorite && 'favorite'}
+                className={isFavorite ? 'favorite' : undefined}
                 key={character.id}
                 id={character.id}
                 name={character.name}
@@ -43,9 +41,8 @@ function CharacterList(props) {
 
 CharacterList.propTypes = {
   characters: PropTypes.array.isRequired,
-  favorites: PropTypes.array.isRequired,
+  favorites: PropTypes.object.isRequired,
   toggleFavorite: PropTypes.func.isRequired
-
 }
 
 export default CharacterList;
