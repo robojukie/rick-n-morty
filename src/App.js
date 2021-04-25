@@ -12,6 +12,7 @@ function App() {
   const [ characters, setCharacters ] = useState([]);
   // use to display characters without modifying original list of characters
   const [ filteredCharacters, setFilteredCharacters ] = useState([]);
+  const [ favorites, setFavorites ] = useState({id: "", favorite: false});
   const [ query, setQuery ] = useState({});
 
   // fetching base url returns 20 of 600+ characters from paginated API
@@ -27,6 +28,15 @@ function App() {
       .then((resJSON) => {
         setCharacters([...resJSON.results])
         setFilteredCharacters([...resJSON.results])
+
+        resJSON.results.map((character) => {
+          setFavorites((favorites) => {
+            return {
+              ...favorites,
+              [character.id]: false
+            }
+          })
+        })
       })
       .catch(error => console.error('Error', error))
     }
@@ -61,7 +71,7 @@ function App() {
           const status = c.status.toLowerCase() === 'unknown' ? c.status.toLowerCase() + 'Status' : c.status.toLowerCase()
           const species = c.species.toLowerCase() === 'unknown' ? c.species.toLowerCase() + 'Species' : c.species.toLowerCase()
 
-          const nameMatched = name.includes(query.name.trim().toLowerCase())
+          const nameMatched = name.includes(query.name && query.name.trim().toLowerCase())
           const genderMatched = query[gender] === true
           const statusMatched = query[status] === true
           const speciesMatched = query[species] === true
@@ -79,6 +89,14 @@ function App() {
     filterCharacters(query)
   }, [query])
 
+
+  function toggleFavorite(id) {
+    setFavorites((favs) => ({
+      ...favorites,
+      [id]: !(favs[id])
+    }))
+  }
+  
   /**
    * Sets query with updated values
    * @param { event } e Event interface
@@ -128,6 +146,8 @@ function App() {
                   <CharacterList
                     characters={filteredCharacters}
                     query={query}
+                    favorites={favorites}
+                    toggleFavorite={toggleFavorite}
                   />
                 </div>
               </div>
@@ -139,6 +159,7 @@ function App() {
           render={() => (
             <CharacterDetail
               characters={characters}
+              favorites={favorites}
             />
           )}
         />

@@ -4,8 +4,8 @@ import { Link, useParams } from 'react-router-dom';
  * Displays page of individual character details, including image, name, status, gender, species, location
  */
 function CharacterDetail(props) {
-  const { characters } = props;
-  
+  const { characters, favorites } = props;
+
   /**
    * Getting ID from param instead of specific character through link
    * since user should be able to type in any id without depending on click action from list
@@ -17,6 +17,7 @@ function CharacterDetail(props) {
    * Filter doesn't rely on server to load data each time a new id is looked up, transition looks smoother
    */
   let selectedCharacter = characters.filter((c) => c.id === parseInt(id))[0]
+  const isFavorite = favorites[selectedCharacter.id] === true;
 
   return (
     <div className='detail-page-container'>
@@ -24,7 +25,7 @@ function CharacterDetail(props) {
         <div className='detail-page-top'>
           <div className='character-profile-picture' style={{backgroundImage: `url(${selectedCharacter.image})`}}></div>
           <div className='character-details'>
-            <h1>
+            <h1 className={isFavorite && 'favorite'}>
               {selectedCharacter.name}
             </h1>
             <div>Status: {selectedCharacter.status}</div>

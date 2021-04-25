@@ -107,6 +107,11 @@ a {
   justify-content: center;
 }
 
+/* favorites */
+.favorite {
+  color: red
+}
+
 /* CharacterDetail */
 .detail-page-top, .character-details, .detail-page-bottom, .detail-page-bad-id {
   width: 75%;
