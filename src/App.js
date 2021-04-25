@@ -112,7 +112,6 @@ function App() {
   }, [favorites]);
 
   function toggleFavorite(id) {
-    // console.log({id})
     setFavorites((favs) => ({
       ...favorites,
       [id]: favs ? !favs[id] : true,
