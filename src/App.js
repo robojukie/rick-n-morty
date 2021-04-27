@@ -20,18 +20,17 @@ function App() {
      * Fetches characters from API
      */
     async function fetchCharacters() {
-      await fetch(baseUrl, {
+      await fetch(`${baseUrl}/?name=${query.name || ''}`, {
         method: 'GET'
       })
       .then((response) => response.json())
       .then((resJSON) => {
         setCharacters([...resJSON.results])
-        // setFilteredCharacters([...resJSON.results])
       })
       .catch(error => console.error('Error', error))
     }
     fetchCharacters()
-  }, [baseUrl])
+  }, [baseUrl, query])
 
   /**
    * Filter characters when query changes
@@ -59,16 +58,6 @@ function App() {
       })
     }
   }, [query, characters])
-
-  // setFilteredCharacters(filterCharacters)
-
-  // useEffect(() =>{
-  //   /**
-  //    * if (name empty and all unchecked) -> return all characters
-  //    * else filter by name and gender
-  //    */
-    
-  // }, [query])
 
   /**
    * Sets query with updated values
