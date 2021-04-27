@@ -37,26 +37,44 @@ function App() {
    */
 
   const filteredCharacters = useMemo(() => {
-    let areAllUnchecked = true;
-    // TODO break out into functions
-    if (query) {
-      // check for all filter values to not be true
-      for ( const [key, val] of Object.entries(query)) {
-        if (val === true) {
-          areAllUnchecked =  false;
-          break;
+    // check for all filter values to not be true
+    const returnAllValues = (filterType) => {
+      for (const item of filterType) {
+        if (query[item.name] === true) {
+          return false
         }
       }
+      return true
+    }
+    // if all boxes are unchecked, return true so all characters are returned after filter
+    const returnAllGenders = query ? returnAllValues(genderFilters) : true
+    const returnAllStatus = query ? returnAllValues(statusFilters) : true
+    const returnAllSpecies = query ? returnAllValues(speciesFilters) : true
 
+    // let filtered;
+    if (query) {
       return characters.filter((c) => {
-        const nameMatched = c.name.toLowerCase().includes(query.name && query.name.trim().toLowerCase())
-        const genderMatched = query[c.gender.toLowerCase()] === true;
-        return (nameMatched && genderMatched) 
-          || (nameMatched && areAllUnchecked) // for inital app load when all unchecked
-          || (!query.name && areAllUnchecked) // absence of query.name and all unchecked after intially checked
-          || (!query.name && genderMatched) // handles initial absence of query.name
+        const name = c.name.toLowerCase()
+        const gender = c.gender.toLowerCase()
+        // query stores all filter types by name, so need to differentiate when query.name = 'unknown' by type (i.e. 'unknownStatus'). query.unknown defaults to unknown gender value
+        const status = c.status.toLowerCase() === 'unknown' ? c.status.toLowerCase() + 'Status' : c.status.toLowerCase()
+        const species = c.species.toLowerCase() === 'unknown' ? c.species.toLowerCase() + 'Species' : c.species.toLowerCase()
+
+        const nameMatched = name.includes(query.name && query.name.trim().toLowerCase())
+        const genderMatched = query[gender] === true
+        const statusMatched = query[status] === true
+        const speciesMatched = query[species] === true
+
+        if ((returnAllGenders || genderMatched) && (returnAllStatus || statusMatched) && (returnAllSpecies || speciesMatched)) {
+          if (!query.name || nameMatched) {
+            return true
+          }
+        }
+        return false
       })
     }
+    // const filterCharacters = () => {
+    // }
   }, [query, characters])
 
   /**
