@@ -46,36 +46,7 @@ function App() {
       }
       return true
     }
-    // if all boxes are unchecked, return true so all characters are returned after filter
-    const returnAllGenders = query ? returnAllValues(genderFilters) : true
-    const returnAllStatus = query ? returnAllValues(statusFilters) : true
-    const returnAllSpecies = query ? returnAllValues(speciesFilters) : true
-
-    const filterCharacters = () => {
-      let filtered;
-      if (query) {
-        filtered = characters.filter((c) => {
-          const name = c.name.toLowerCase()
-          const gender = c.gender.toLowerCase()
-          // query stores all filter types by name, so need to differentiate when query.name = 'unknown' by type (i.e. 'unknownStatus'). query.unknown defaults to unknown gender value
-          const status = c.status.toLowerCase() === 'unknown' ? c.status.toLowerCase() + 'Status' : c.status.toLowerCase()
-          const species = c.species.toLowerCase() === 'unknown' ? c.species.toLowerCase() + 'Species' : c.species.toLowerCase()
-
-          const nameMatched = name.includes(query.name.trim().toLowerCase())
-          const genderMatched = query[gender] === true
-          const statusMatched = query[status] === true
-          const speciesMatched = query[species] === true
-
-          if ((returnAllGenders || genderMatched) && (returnAllStatus || statusMatched) && (returnAllSpecies || speciesMatched)) {
-            if (!query.name || nameMatched) {
-              return true
-            }
-          }
-          return false
-        })
-      }     
-      setFilteredCharacters(filtered)
-    }
+    
     // if all boxes are unchecked, return true so all characters are returned after filter
     const returnAllGenders = query ? returnAllValues(genderFilters) : true
     const returnAllStatus = query ? returnAllValues(statusFilters) : true
